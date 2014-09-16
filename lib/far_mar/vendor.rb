@@ -2,12 +2,11 @@ module FarMar
   class Vendor
     attr_accessor :id, :name, :employees, :market_id
     def initialize(id, name, employees, market_id)
-      @id = id
+      @id = id.to_i
       @name = name
       @employees = employees
       @market_id = market_id
       @sales = []
-      @other_vendors = []
       @products = []
     end
 
@@ -25,9 +24,10 @@ module FarMar
     end
 
     def self.by_market(market_id)
+            other_vendors = []
       FarMar::Vendor.all.each do |vendor|
         if vendor.market_id == market_id
-          @other_vendors << vendor
+          other_vendors << vendor
         end
       end
     end

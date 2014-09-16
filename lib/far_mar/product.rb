@@ -2,11 +2,9 @@ module FarMar
   class Product
     attr_accessor :id, :name, :vendor_id
     def initialize(id, name, vendor_id)
-      @id = id
+      @id = id.to_i
       @name = name
-      @vendor_id = vendor_id
-      @sales = []
-      @other_products = []
+      @vendor_id = vendor_id.to_i
     end
 
     def self.all
@@ -31,25 +29,27 @@ module FarMar
     end
 
     def sales
+            sales = []
       FarMar::Sale.all.each do |sale|
         if sale.product_id == id
-          @sales << sale
+          sales << sale
         end
       end
-      @sales
+      sales
     end
 
     def number_of_sales
-      @sales.length
+      sales.length
     end
 
     def self.by_vendor(vendor_id) #rspec issue here
+      result = []
       self.all.each do |product| #changed to self from FarMar::Product
         if product.vendor_id == vendor_id
-          @other_products << product
+          result << product
         end
       end
-      @other_products
+      result
     end
 
   end
