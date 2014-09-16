@@ -28,7 +28,6 @@ module FarMar
     array = []
     FarMar::Vendor.each do |vendor|
       if vendor.market_id == id
-        puts vendor
         array.push(vendor)
       end
       array

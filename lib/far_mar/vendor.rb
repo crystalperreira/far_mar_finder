@@ -33,7 +33,7 @@ module FarMar
   def products(vendor)
     array_of_products = []
     FarMar::Product.each do |product|
-      if product[2] == vendor[0]
+      if product.vendor_id == vendor.id
         array_of_products.push(vendor)
       end
       array_of_products
@@ -43,7 +43,7 @@ module FarMar
   def sales(vendor)
     array_of_sales = []
     FarMar::Sale.each do |sale|
-      if sale[3] == vendor[0]
+      if sale.vendor_id == vendor.id
         array_of_sales = []
       end
       array_of_sales
