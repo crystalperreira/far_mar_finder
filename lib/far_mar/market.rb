@@ -11,6 +11,7 @@ module FarMar
       @county = county
       @state = state
       @zip = zip
+      @vendors = []
     end
 
   def self.all
@@ -26,16 +27,12 @@ module FarMar
     all.find {|market| market.id == id }
   end
 
-  def vendors
-    array = []
-   # puts (market.vendors.first).inspect
-   # IO.write.market.vendors.first ###
+  def build_vendors
     FarMar::Vendor.all.each do |vendor|
       if vendor.market_id == self.id # can access because of attr_accessor
-         array << vendor
+         @vendors << vendor
       end
     end
-    array
   end
   end
 end
