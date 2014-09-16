@@ -1,6 +1,6 @@
 module FarMar
   class Vendor
-    attr_accessor :id :name :employees :market_id
+    attr_accessor :id, :name, :employees, :market_id
     def initialize(id, name, employees, market_id)
       @id = id
       @name = name
@@ -25,7 +25,9 @@ module FarMar
       if market[0] == vendor[3]
         puts vendor
       end
+    end
   end
+
 
   def products(vendor)
     array_of_products = []
@@ -34,6 +36,7 @@ module FarMar
         array_of_products.push(vendor)
       end
       array_of_products
+    end
   end
 
   def sales(vendor)
@@ -43,5 +46,8 @@ module FarMar
         array_of_sales = []
       end
       array_of_sales
+    end
+  end
   end
 end
+
