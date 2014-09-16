@@ -2,7 +2,7 @@ module FarMar
   class Market
     attr_accessor :id, :name, :address, :city, :county, :state, :zip
     def initialize(id, name, address, city, county, state, zip)
-      @id = id
+      @id = id.to_i
       @name = name
       @address = address
       @city = city
@@ -21,14 +21,14 @@ module FarMar
   end
 
   def self.find(id)
-    self.all
-    @all_markets.find {|market| market[0] == id.to_s}
+    all.find {|market| market.id == id }
   end
 
   def vendor(id)
     array = []
     FarMar::Vendor.each do |vendor|
-      if vendor[3] == id
+      if vendor.market_id == id
+        puts vendor
         array.push(vendor)
       end
       array
@@ -36,4 +36,3 @@ module FarMar
   end
   end
 end
-

@@ -9,17 +9,16 @@ module FarMar
       @product_id = product_id
     end
 
-    def self.all
-    array_of_sales = CSV.read("/support/sales.csv")
+  def self.all
+    @all_sales = []
+    array_of_sales = CSV.read("./support/sales.csv")
     array_of_sales.each do |sale|
-      Sale.new(sale[0], sale[1], sale[2], sale[3], sale[4])
+      @all_sales << Sale.new(sale[0], sale[1], sale[2], sale[3], sale[4])
     end
-    end
-
+    @all_sales
+  end
     def self.find(id)
-    array_of_sales = CSV.read("/support/sales.csv") 
-    array_of_sales.find {|sale| sale[0] == id.to_s}
+      all.find {|sale| sale.id == id }
     end
 end
 end
-

@@ -9,15 +9,16 @@ module FarMar
   end
 
   def self.all
-    array_of_vendors = CSV.read("/support/vendors.csv")
+    @all_vendors = []
+    array_of_vendors = CSV.read("./support/vendors.csv")
     array_of_vendors.each do |vendor|
-      Vendor.new(vendor[0], vendor[1], vendor[2], vendor[3])
+      @all_vendors << Vendor.new(vendor[0], vendor[1], vendor[2], vendor[3])
     end
+    @all_vendors
   end
 
   def self.find(id)
-    array_of_vendors = CSV.read("/support/vendors.csv")
-    array_of_vendors.find {|vendor| vendor[0] == id.to_s}
+    all.find {|vendor| vendor.id == id }
   end
 
   def market(vendor)
@@ -50,4 +51,3 @@ module FarMar
   end
   end
 end
-
