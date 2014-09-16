@@ -43,8 +43,8 @@ module FarMar
       @sales.length
     end
 
-    def self.by_vendor(vendor_id)
-      FarMar::Product.all.each do |product|
+    def self.by_vendor(vendor_id) #rspec issue here
+      self.all.each do |product| #changed to self from FarMar::Product
         if product.vendor_id == vendor_id
           @other_products << product
         end

@@ -27,7 +27,7 @@ module FarMar
     all.find {|market| market.id == id }
   end
 
-  def build_vendors
+  def vendors
     FarMar::Vendor.all.each do |vendor|
       if vendor.market_id == self.id # can access because of attr_accessor
          @vendors << vendor
