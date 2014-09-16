@@ -24,14 +24,14 @@ module FarMar
     all.find {|market| market.id == id }
   end
 
-  def vendor(id)
+  def vendors
     array = []
-    FarMar::Vendor.each do |vendor|
-      if vendor.market_id == id
+    FarMar::Vendor.all.each do |vendor|
+      if vendor.market_id == self.id # can access because of attr_accessor
         array.push(vendor)
       end
-      array
     end
+    array
   end
   end
 end

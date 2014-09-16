@@ -46,17 +46,17 @@ describe FarMar::Market do
 
   end
 
-  describe "instance methods" do
-    let(:market) { FarMar::Market.find(1) }
-    it "responds to vendors" do
-      expect(FarMar::Market.new({})).to respond_to :vendors
-    end
+ # describe "instance methods" do
+ #   let(:market) { FarMar::Market.find(1) }
+ #   it "responds to vendors" do
+ #     expect(FarMar::Market.new([])).to respond_to :vendors
+ #   end
 
-    # describe "instance methods" do
-    #   let(:market) { FarMar::Market.find(1) }
-    #   it "responds to vendors" do
-    #     expect(market).to respond_to :vendors
-    #   end
+     describe "instance methods" do
+       let(:market) { FarMar::Market.find(1) } # added quotes
+       it "responds to vendors" do
+         expect(market).to respond_to :vendors
+       end
 
     it "finds the vendors" do
       expect(market.vendors.first.id).to eq 1

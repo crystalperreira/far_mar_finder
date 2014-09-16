@@ -23,7 +23,7 @@ module FarMar
 
   def market(vendor)
     FarMar::Market.each do |market|
-      if market[0] == vendor[3]
+      if market.id == vendor.market_id
         puts vendor
       end
     end
