@@ -1,3 +1,5 @@
+require 'io/console'
+
 module FarMar
   class Market
     attr_accessor :id, :name, :address, :city, :county, :state, :zip
@@ -26,9 +28,11 @@ module FarMar
 
   def vendors
     array = []
+   # puts (market.vendors.first).inspect
+   # IO.write.market.vendors.first ###
     FarMar::Vendor.all.each do |vendor|
       if vendor.market_id == self.id # can access because of attr_accessor
-        array.push(vendor)
+         array << vendor
       end
     end
     array

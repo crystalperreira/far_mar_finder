@@ -59,7 +59,7 @@ describe FarMar::Market do
        end
 
     it "finds the vendors" do
-      expect(market.vendors.first.id).to eq 1
+      expect(market.vendors.first.id).to eq 1 # added .to_i
     end
   end
 end
