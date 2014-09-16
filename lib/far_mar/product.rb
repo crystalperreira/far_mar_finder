@@ -49,7 +49,7 @@ module FarMar
           @other_products << product
         end
       end
-      @products
+      @other_products
     end
 
   end
