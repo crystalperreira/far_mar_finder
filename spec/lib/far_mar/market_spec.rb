@@ -59,7 +59,7 @@ describe FarMar::Market do
        end
 ####
    it "finds the products" do
-     expect (market.products.first.name).to eq "Dry Beets"
+     expect(market.products.first.id).to eq 1
    end
 #####
     it "finds the vendors" do

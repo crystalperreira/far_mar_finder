@@ -47,7 +47,6 @@ module FarMar
     all_products.flatten!
   end
 
-  # This is broken
   def vendors
     array = []
     FarMar::Vendor.all.each do |vendor|
