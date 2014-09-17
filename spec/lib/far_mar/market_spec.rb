@@ -22,11 +22,7 @@ describe FarMar::Market do
     it "has the id 1" do
       expect(market.id).to eq 1
     end
-#Test for products method
-    # it "finds the id of the first product available at market 1" do
-    #   expect(FarMar::Product.vendor.market.first.name).to eq "Dry Beets"
-    # end
-###
+
     it "has the name 'People's Co-op Farmers FarMar::Market'" do
       expect(market.name).to eq "People's Co-op Farmers Market"
     end
@@ -53,15 +49,19 @@ describe FarMar::Market do
  # describe "instance methods" do
  #   let(:market) { FarMar::Market.find(1) }
  #   it "responds to vendors" do
- #     expect(FarMar::Market.new([])).to respond_to :vendors
- #   end
+ ##     expect(FarMar::Market.new([])).to respond_to :vendors
+    end
 
      describe "instance methods" do
        let(:market) { FarMar::Market.find(1) } # added quotes
        it "responds to vendors" do
          expect(market).to respond_to :vendors
        end
-
+####
+   it "finds the products" do
+     expect (market.products.first.name).to eq "Dry Beets"
+   end
+#####
     it "finds the vendors" do
       expect(market.vendors.first.id.to_i).to eq 1 # added .to_i
     end

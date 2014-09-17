@@ -27,15 +27,15 @@ module FarMar
     all.find {|market| market.id == id }
   end
 
-  # def products
-  #   products = []
-  #   FarMar::Product.all.each do |product|
-  #     if id == product.vendor.market_id
-  #       products << product
-  #     end
-  #   end
-  #   products
-  # end
+  def products
+    all_products = []
+    FarMar::Vendor.all.each do |vendor|
+      if vendor.market_id == id
+        all_products << vendor.products
+      end
+    end
+    all_products.flatten!
+  end
 
   def vendors
     FarMar::Vendor.all.each do |vendor|
