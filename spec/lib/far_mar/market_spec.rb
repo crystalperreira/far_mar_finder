@@ -22,7 +22,11 @@ describe FarMar::Market do
     it "has the id 1" do
       expect(market.id).to eq 1
     end
-
+#Test for products method
+    # it "finds the id of the first product available at market 1" do
+    #   expect(FarMar::Product.vendor.market.first.name).to eq "Dry Beets"
+    # end
+###
     it "has the name 'People's Co-op Farmers FarMar::Market'" do
       expect(market.name).to eq "People's Co-op Farmers Market"
     end

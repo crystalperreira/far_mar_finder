@@ -4,7 +4,7 @@ module FarMar
   class Market
     attr_accessor :id, :name, :address, :city, :county, :state, :zip
     def initialize(id, name, address, city, county, state, zip)
-      @id = id.to_i
+      @id = id
       @name = name
       @address = address
       @city = city
@@ -18,7 +18,7 @@ module FarMar
     @all_markets = []
     array_of_markets = CSV.read("./support/markets.csv")
     array_of_markets.each do |market|
-      @all_markets << Market.new(market[0], market[1], market[2], market[3], market[4],market[5], market[6])
+      @all_markets << Market.new(market[0].to_i, market[1], market[2], market[3], market[4],market[5], market[6])
     end
     @all_markets
   end
@@ -27,6 +27,16 @@ module FarMar
     all.find {|market| market.id == id }
   end
 
+  # def products
+  #   products = []
+  #   FarMar::Product.all.each do |product|
+  #     if id == product.vendor.market_id
+  #       products << product
+  #     end
+  #   end
+  #   products
+  # end
+
   def vendors
     FarMar::Vendor.all.each do |vendor|
       if vendor.market_id == self.id # can access because of attr_accessor
@@ -34,5 +44,6 @@ module FarMar
       end
     end
   end
+
   end
 end
