@@ -11,7 +11,6 @@ module FarMar
       @county = county
       @state = state
       @zip = zip
-      @vendors = []
     end
 
   def self.all
@@ -27,6 +26,17 @@ module FarMar
     all.find {|market| market.id == id }
   end
 
+  ################
+  def self.search(search_term)
+          array = []
+          self.all.each do |market_instance|
+                  if market_instance.name == search_term.downcase || market_instance.vendors == search_term.downcase
+                          array << market_instance
+                  end
+          end
+          array
+  end
+
   def products
     all_products = []
     FarMar::Vendor.all.each do |vendor|
@@ -37,12 +47,15 @@ module FarMar
     all_products.flatten!
   end
 
+  # This is broken
   def vendors
+    array = []
     FarMar::Vendor.all.each do |vendor|
-      if vendor.market_id == self.id # can access because of attr_accessor
-         @vendors << vendor
+      if vendor.market_id == id # trying to get this from market instance
+         array << vendor
       end
     end
+    array
   end
 
   end
