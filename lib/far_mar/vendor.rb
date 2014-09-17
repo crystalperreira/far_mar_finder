@@ -1,20 +1,18 @@
 module FarMar
   class Vendor
-    attr_accessor :id, :name, :employees, :market_id
-    def initialize(id, name, employees, market_id)
-      @id = id.to_i
+    attr_accessor :id, :name, :no_of_employees, :market_id
+    def initialize(id, name, no_of_employees, market_id)
+      @id = id
       @name = name
-      @employees = employees
+      @no_of_employees = no_of_employees
       @market_id = market_id
-      @sales = []
-      @products = []
     end
 
     def self.all
       @all_vendors = []
       array_of_vendors = CSV.read("./support/vendors.csv")
       array_of_vendors.each do |vendor|
-        @all_vendors << Vendor.new(vendor[0], vendor[1], vendor[2], vendor[3])
+        @all_vendors << Vendor.new(vendor[0].to_i, vendor[1], vendor[2].to_i, vendor[3].to_i)
       end
       @all_vendors
     end
@@ -24,39 +22,44 @@ module FarMar
     end
 
     def self.by_market(market_id)
-            other_vendors = []
-      FarMar::Vendor.all.each do |vendor|
+      other_vendors = []
+      self.all.each do |vendor|
         if vendor.market_id == market_id
           other_vendors << vendor
         end
       end
+      other_vendors
     end
 
     def market
+      x = ""
       FarMar::Market.all.each do |market|
         if market.id == market_id
-          puts market
+          x = market
         end
       end
+      x
     end
 
 
-    def products(vendor)
+    def products
+      products = []
       FarMar::Product.all.each do |product|
-        if product.vendor_id == id
-          @products << vendor
+        if id == product.vendor_id
+          products << product
         end
       end
-      @products
+      products
     end
 
-    def sales_builder
+    def sales
+      sales = []
       FarMar::Sale.all.each do |sale|
         if sale.vendor_id == id
-          @sales << sale
+          sales << sale
         end
       end
-      @sales
+      sales
     end
 
     def revenue

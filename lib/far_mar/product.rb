@@ -2,16 +2,16 @@ module FarMar
   class Product
     attr_accessor :id, :name, :vendor_id
     def initialize(id, name, vendor_id)
-      @id = id.to_i
+      @id = id
       @name = name
-      @vendor_id = vendor_id.to_i
+      @vendor_id = vendor_id
     end
 
     def self.all
       @all_products = []
       array_of_products = CSV.read("./support/products.csv")
       array_of_products.each do |product|
-        @all_products << Product.new(product[0], product[1], product[2])
+        @all_products << Product.new(product[0].to_i, product[1], product[2].to_i)
       end
       @all_products
     end
@@ -21,15 +21,17 @@ module FarMar
     end
 
     def vendor
+      x = ""
       FarMar::Vendor.all.each do |vendor|
         if vendor.id == vendor_id
-          vendor
+          x = vendor
         end
       end
+      x
     end
 
     def sales
-            sales = []
+      sales = []
       FarMar::Sale.all.each do |sale|
         if sale.product_id == id
           sales << sale
