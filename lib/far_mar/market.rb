@@ -30,8 +30,13 @@ module FarMar
   def self.search(search_term)
           array = []
           self.all.each do |market_instance|
-                  if market_instance.name == search_term.downcase || market_instance.vendors == search_term.downcase
+                  if market_instance.name.downcase == search_term.downcase
                           array << market_instance
+                  end
+                  market_instance.vendors.each do |instance_piece|
+                          if instance_piece.downcase == search_term.downcase
+                                  array << market_instance
+                          end
                   end
           end
           array
