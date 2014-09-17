@@ -13,6 +13,10 @@ describe FarMar::Market do
     it "responds to 'find'" do
       expect(FarMar::Market).to respond_to :find
     end
+#####NEW#TEST#####
+    it "responds to 'search'" do
+      expect(FarMar::Market).to respond_to :search
+    end
   end
 
   describe "attributes" do
@@ -57,10 +61,14 @@ describe FarMar::Market do
        it "responds to vendors" do
          expect(market).to respond_to :vendors
        end
-####
-   it "finds the products" do
-     expect(market.products.first.id).to eq 1
-   end
+#########TESTING##########
+      # it "finds the preferred vendor" do
+      #   expect(market.preferred_vendor.first.id).to eq 1 # added .to_i
+      # end
+############
+     it "finds the products" do
+       expect(market.products.first.id).to eq 1
+     end
 #####
     it "finds the vendors" do
       expect(market.vendors.first.id.to_i).to eq 1 # added .to_i
