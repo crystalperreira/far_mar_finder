@@ -27,16 +27,19 @@ module FarMar
     end
 
     ################
-    def self.search(search_term)
+    def self.search(search_term) # only searches market name (not vendors)
       array = []
       self.all.each do |market_instance|
         if market_instance.name.downcase == search_term.downcase
           array << market_instance
         end
-        market_instance.vendors.each do |instance_piece|
-          if instance_piece.downcase == search_term.downcase
-            array << market_instance
-          end
+      end
+
+      self.all.each do |market_instance|
+        market_instance.vendors.each do |vendor|
+                if vendor.name.downcase == search_term.downcase
+                    array << market_instance
+                end
         end
       end
       array
