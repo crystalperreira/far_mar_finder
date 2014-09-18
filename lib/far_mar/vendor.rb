@@ -30,6 +30,15 @@ module FarMar
       end
       other_vendors
     end
+    
+    ##### test this 
+    def self.most_revenue(n)
+      array = []
+      n_array = []
+      array = self.all.sort_by {|vendor| vendor.revenue}
+      array[0..(n-1)]
+    end
+
 
     def market
       x = ""
