@@ -1,12 +1,11 @@
 module FarMar
   class Vendor
-    attr_accessor :id, :name, :no_of_employees, :market_id, :daily_revenue
+    attr_accessor :id, :name, :no_of_employees, :market_id
     def initialize(id, name, no_of_employees, market_id)
       @id = id
       @name = name
       @no_of_employees = no_of_employees
       @market_id = market_id
-      @daily_revenue = 0
     end
 
     def self.all
@@ -73,7 +72,15 @@ module FarMar
       sale_total
     end
 
-
+    def daily_revenue(date)
+        tally = 0
+        FarMar::Sale.all.each do |sale|
+            if sale.purchase_time.to_s == date && sale.vendor_id == id
+                tally += sale.amount
+            end
+        end
+        tally
+    end
 
   end
 end

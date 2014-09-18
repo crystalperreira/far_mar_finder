@@ -48,28 +48,15 @@ module FarMar
 
     ##################################
     def preferred_vendor_date(my_date)
-      date_array = []
-      vendors = []
-      max = 0
-      pref_vend = ""
-      FarMar::Vendor.all.each do |vendor|
-        vendor.sales.each do |sale|
-          if sale.purchase_time.to_s == my_date
-            date_array << sale
-            vendors << vendor
-          end
+        max = 0
+        pref_vend = ""
+        FarMar::Vendor.all.each do |vendor|
+            if vendor.daily_revenue(my_date) > max
+                max = vendor.daily_revenue(my_date)
+                pref_vend = vendor
+            end 
         end
-        date_array.each do |sale_instance|
-          vendor.daily_revenue += sale_instance.amount
-        end
-        vendors.each do |vendor|
-          if vendor.daily_revenue > max
-            max = vendor.daily_revenue
-            pref_vend = vendor
-          end
-        end
-      end
-    pref_vend
+        pref_vend
     end
 
     def preferred_vendor
