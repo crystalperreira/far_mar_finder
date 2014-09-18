@@ -51,7 +51,7 @@ module FarMar
         max = 0
         pref_vend = ""
         FarMar::Vendor.all.each do |vendor|
-            if vendor.daily_revenue(my_date) > max
+            if vendor.market_id == id && vendor.daily_revenue(my_date) > max
                 max = vendor.daily_revenue(my_date)
                 pref_vend = vendor
             end 

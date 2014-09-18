@@ -66,7 +66,11 @@ describe FarMar::Market do
        ####Preferred vendor
      it "finds the preferred vendor" do
         expect(market.preferred_vendor.id).to eq 1 # added .to_i
-      end
+     end
+
+     it "finds the preferred vendor by date" do
+        expect(market.preferred_vendor_date("2013-11-07").id).to eq 1
+     end
 
      it "finds the products" do
        expect(market.products.first.id).to eq 1
