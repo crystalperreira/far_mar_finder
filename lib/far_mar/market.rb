@@ -59,6 +59,18 @@ module FarMar
         pref_vend
     end
 
+    def worst_vendor_date(my_date)
+        max = 9000000
+        pref_vend = ""
+        FarMar::Vendor.all.each do |vendor|
+            if vendor.market_id == id && vendor.daily_revenue(my_date) < max
+                max = vendor.daily_revenue(my_date)
+                pref_vend = vendor
+            end
+        end
+        pref_vend
+    end
+
     def preferred_vendor
        x = 0
        pref_vendor = ""
@@ -73,6 +85,19 @@ module FarMar
        pref_vendor
      end
 
+def worst_vendor
+    x = 9000000
+    pref_vendor = ""
+    FarMar::Vendor.all.each do |vendor|
+        if self.id == vendor.id
+            if vendor.revenue < x
+                x = vendor.revenue
+                pref_vendor = vendor
+            end
+        end
+    end
+    pref_vendor
+end
 
     def products
       all_products = []
