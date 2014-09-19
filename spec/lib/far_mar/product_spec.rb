@@ -22,6 +22,10 @@ describe FarMar::Product do
     it "find the first product by market 1" do
       expect(FarMar::Product.by_vendor(1).first.name).to eq "Dry Beets"
     end
+
+	it "find the highest grossing product by revenue" do
+	  expect(FarMar::Product.most_revenue(1).first.id).to eq 6887
+	end
   end
 
   describe "attributes" do

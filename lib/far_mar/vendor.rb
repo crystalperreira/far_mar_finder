@@ -8,13 +8,18 @@ module FarMar
       @market_id = market_id
     end
 
+    # Used memoization for self.all
+
+    @@all_vendors = []
+
     def self.all
-      @all_vendors = []
-      array_of_vendors = CSV.read("./support/vendors.csv")
-      array_of_vendors.each do |vendor|
-        @all_vendors << Vendor.new(vendor[0].to_i, vendor[1], vendor[2].to_i, vendor[3].to_i)
+      if @@all_vendors == []
+        array_of_vendors = CSV.read("./support/vendors.csv")
+        array_of_vendors.each do |vendor|
+          @@all_vendors << Vendor.new(vendor[0].to_i, vendor[1], vendor[2].to_i, vendor[3].to_i)
+        end
       end
-      @all_vendors
+      @@all_vendors
     end
 
     def self.find(id)
@@ -30,7 +35,7 @@ module FarMar
       end
       other_vendors
     end
-#####################problems here
+
     def self.most_revenue(n)
       array = all.sort_by {|vendor| vendor.revenue}
       array.take(n)
@@ -78,14 +83,13 @@ module FarMar
     end
 
     def daily_revenue(date)
-        tally = 0
-        FarMar::Sale.all.each do |sale|
-            if sale.purchase_time.to_date.to_s == date && sale.vendor_id == id
-                tally += sale.amount
-            end
+      tally = 0
+      FarMar::Sale.all.each do |sale|
+        if sale.purchase_time.to_date.to_s == date && sale.vendor_id == id
+          tally += sale.amount
         end
-        tally
+      end
+      tally
     end
-
   end
 end
