@@ -14,9 +14,12 @@ describe FarMar::Market do
       expect(FarMar::Market).to respond_to :find
     end
 
-    #####NEW#TEST#####
     it "responds to 'search'" do
       expect(FarMar::Market).to respond_to :search
+    end
+
+    it "responds to 'search'" do
+      expect(FarMar::Market.search("People's Co-op Farmers Market").first.id).to eq 1
     end
   end
 

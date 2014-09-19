@@ -60,6 +60,10 @@ describe FarMar::Product do
       expect(product.sales.count).to eq 2
     end
 
+    it "returns the number of sales" do
+      expect(product.number_of_sales).to eq 2
+    end
+
   end
 
 end

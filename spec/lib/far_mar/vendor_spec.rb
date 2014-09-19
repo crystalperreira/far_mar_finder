@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe FarMar::Vendor do
-
   describe "class methods" do
     it "responds to 'all'" do
       expect(FarMar::Vendor).to respond_to :all
@@ -17,6 +16,10 @@ describe FarMar::Vendor do
 
     it "responds to 'by_market'" do
       expect(FarMar::Vendor).to respond_to :by_market
+    end
+
+    it "returns the top n vendor instances ranked by revenue" do
+      expect(FarMar::Vendor.most_revenue(1).first.id).to eq 1441
     end
 
     it "find the first vendor by market 1" do
@@ -68,6 +71,14 @@ describe FarMar::Vendor do
     it "has 1 products" do
       expect(vendor.products.count).to eq 1
     end
-  end
 
+    #############
+    it "has revenue" do
+      expect(vendor.revenue).to eq 38259
+    end
+
+    it "has daily revenue" do
+      expect(vendor.daily_revenue("2013-11-07")).to eq 9290
+    end
+  end
 end

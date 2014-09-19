@@ -13,6 +13,10 @@ describe FarMar::Sale do
     it "responds to 'find'" do
       expect(FarMar::Sale).to respond_to :find
     end
+
+    it "searches for n" do
+      expect(FarMar::Sale.between("2013-11-08 18:31:12 -0800", "2013-11-08 22:31:12 -0800").first.id).to eq 53
+    end
   end
 
   describe "attributes" do

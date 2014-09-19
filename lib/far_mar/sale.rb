@@ -7,7 +7,7 @@ module FarMar
       @purchase_time = purchase_time
       @vendor_id = vendor_id
       @product_id = product_id
-    end 
+    end
 
 ####### do this V
 
@@ -26,6 +26,19 @@ module FarMar
   def self.find(id)
       all.find {|sale| sale.id == id }
   end
+
+  def self.between(beginning_time, end_time)
+    beginning_time = change_date(beginning_time)
+    end_time = change_date(end_time)
+     sales_between=[]
+     FarMar::Sale.all.each do |sale|
+       if sale.purchase_time.between?(beginning_time, end_time)
+         sales_between << sale
+       end
+     end
+     sales_between
+  end
+
  # vendor - returns the FarMar::Vendor instance that is associated with this sale using the FarMar::Sale vendor_id field
     def vendor
       x =""
@@ -51,15 +64,6 @@ module FarMar
    # self.between(beginning_time, end_time) - returns a collection of FarMar::Sale objects where the purchase time is between the two times given as arguments
 
    ########################################################### FIX ME - datetime issues
-   def self.between(beginning_time, end_time)
-      sales_between=[]
-      FarMar::Sale.all.each do |sale|
-        if sale.purchase_time.between?(beginning_time, end_time)
-          sales_between << sale
-        end
-      end
-      sales_between
-   end
 
   end
 end
@@ -67,5 +71,5 @@ end
 
 def change_date(date)
   require 'date'
-  date = DateTime.parse(date).to_date
+  date = DateTime.parse(date)
 end

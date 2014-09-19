@@ -30,7 +30,7 @@ module FarMar
       end
       other_vendors
     end
-#####################problems here     
+#####################problems here
     def self.most_revenue(n)
       array = all.sort_by {|vendor| vendor.revenue}
       array.take(n)
@@ -80,7 +80,7 @@ module FarMar
     def daily_revenue(date)
         tally = 0
         FarMar::Sale.all.each do |sale|
-            if sale.purchase_time.to_s == date && sale.vendor_id == id
+            if sale.purchase_time.to_date.to_s == date && sale.vendor_id == id
                 tally += sale.amount
             end
         end
