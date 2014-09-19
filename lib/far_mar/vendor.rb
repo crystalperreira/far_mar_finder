@@ -30,13 +30,10 @@ module FarMar
       end
       other_vendors
     end
-    
-    ##### test this 
+#####################problems here     
     def self.most_revenue(n)
-      array = []
-      n_array = []
-      array = self.all.sort_by {|vendor| vendor.revenue}
-      array[0..(n-1)]
+      array = all.sort_by {|vendor| vendor.revenue}
+      array.take(n)
     end
 
 
@@ -49,7 +46,6 @@ module FarMar
       end
       x
     end
-
 
     def products
       products = []

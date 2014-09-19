@@ -7,20 +7,25 @@ module FarMar
       @purchase_time = purchase_time
       @vendor_id = vendor_id
       @product_id = product_id
-    end
+    end 
 
+####### do this V
+
+  @@all_sales = []
 
   def self.all
-    @all_sales = []
-    array_of_sales = CSV.read("./support/sales.csv")
-    array_of_sales.each do |sale|
-      @all_sales << Sale.new(sale[0].to_i, sale[1].to_i, change_date(sale[2]), sale[3].to_i, sale[4].to_i)
-    end
-    @all_sales
+	if @@all_sales == []
+		array_of_sales = CSV.read("./support/sales.csv")
+		array_of_sales.each do |sale|
+			@@all_sales << Sale.new(sale[0].to_i, sale[1].to_i, change_date(sale[2]), sale[3].to_i, sale[4].to_i)
+		end
+	end
+    @@all_sales
   end
-    def self.find(id)
+
+  def self.find(id)
       all.find {|sale| sale.id == id }
-    end
+  end
  # vendor - returns the FarMar::Vendor instance that is associated with this sale using the FarMar::Sale vendor_id field
     def vendor
       x =""
@@ -45,6 +50,7 @@ module FarMar
 
    # self.between(beginning_time, end_time) - returns a collection of FarMar::Sale objects where the purchase time is between the two times given as arguments
 
+   ########################################################### FIX ME - datetime issues
    def self.between(beginning_time, end_time)
       sales_between=[]
       FarMar::Sale.all.each do |sale|
